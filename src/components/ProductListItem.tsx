@@ -6,10 +6,16 @@ type ProductListItemProps = {
   product: Product
 }
 
+const defaultPizza = `https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png`
+
 export default function ProductListItem({product}: ProductListItemProps) {
   return (
     <View style={styles.container}>
-      <Image source={{uri: product.image}} style={styles.image}/>
+      <Image 
+        source={{uri: product.image || defaultPizza}} 
+        style={styles.image}
+        resizeMode='contain'
+      />
 
       <View style={styles.infoContainer}>
         <Text style={styles.name}>{product.name}</Text>
@@ -23,7 +29,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 8
+    padding: 8,
+    flex: 1,
+    maxWidth: '50%'
   },
   image: {
     width: '100%',
