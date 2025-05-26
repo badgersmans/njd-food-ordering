@@ -1,3 +1,4 @@
+import Colors from '@/constants/Colors'
 import { Product } from '@/types/types'
 import { View, Text, Image, StyleSheet } from 'react-native'
 
@@ -7,7 +8,7 @@ type ProductListItemProps = {
 
 export default function ProductListItem({product}: ProductListItemProps) {
   return (
-    <View>
+    <View style={styles.container}>
       <Image source={{uri: product.image}} style={styles.image}/>
 
       <View style={styles.infoContainer}>
@@ -19,22 +20,27 @@ export default function ProductListItem({product}: ProductListItemProps) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 8
+  },
   image: {
     width: '100%',
     aspectRatio: 1/1
   },
   infoContainer: {
     // backgroundColor: 'red',
-    gap: 8,
-    marginHorizontal: 8
+    gap: 10,
+    // marginHorizontal: 8
   },
   name: {
     fontWeight: '600',
-    fontSize: 25
+    fontSize: 23
   },
   price: {
-    color: '#6495C0',
+    color: Colors.light.tint,
     fontSize: 16,
-    fontWeight: '600'
+    fontWeight: 'bold'
   },
 })
