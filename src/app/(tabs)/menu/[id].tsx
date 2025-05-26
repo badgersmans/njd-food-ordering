@@ -1,13 +1,15 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import products from '@assets/data/products'
 import { defaultPizza } from '@/components/ProductListItem'
 import Colors from '@/constants/Colors'
+import { useState } from 'react'
 
 const sizes = ['S', 'M', 'L', 'XL']
 
 export default function ProductDetails() {
   const {id} = useLocalSearchParams()
+  const [selectedSize, setSelectedSize] = useState('M')
   const product = products.find((productItem) => productItem.id.toString() === id)
   // console.log(product)
   if(!product) {
@@ -22,9 +24,16 @@ export default function ProductDetails() {
       <Text>Select Size</Text>
       <View style={styles.sizesContainer}>
         {sizes.map(size => (
-          <View key={size} style={styles.sizeTextContainer}>
+          <TouchableOpacity 
+            key={size} 
+            style={
+              selectedSize === size 
+              ? styles.sizeTextContainer 
+              : [styles.sizeTextContainer, { backgroundColor: null }]}
+            onPress={() => setSelectedSize(size)}
+          >
             <Text style={styles.sizeText}>{size}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
 
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
   sizesContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginVertical: 10
+    marginVertical: 10,
     // backgroundColor: 'green'
   },
   sizeTextContainer: {
