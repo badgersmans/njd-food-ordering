@@ -4,10 +4,14 @@ import {FontAwesome5, Ionicons} from '@expo/vector-icons';
 export default function TabsLayout() {
   return (
     <Tabs>
+
+      <Tabs.Screen name='index' options={{href: null}}/>
+
       <Tabs.Screen 
-        name='index'
+        name='menu'
         options={{
           title: 'Menu',
+          headerShown: false,
           tabBarIcon: ({color}) => (
             <FontAwesome5 name="utensils" size={20} color={color} />
           )
