@@ -4,20 +4,26 @@ import products from '@assets/data/products'
 import { defaultPizza } from '@/components/ProductListItem'
 import { useState } from 'react'
 import Button from '@/components/Button'
+import { useCart } from '@/providers/CartProvider'
+import { PizzaSize } from '@/types/types'
 
-const sizes = ['S', 'M', 'L', 'XL']
+const sizes: PizzaSize[] = ['S', 'M', 'L', 'XL']
 
 export default function ProductDetails() {
   const {id} = useLocalSearchParams()
-  const [selectedSize, setSelectedSize] = useState('M')
+  const [selectedSize, setSelectedSize] = useState<PizzaSize>('M')
   const product = products.find((productItem) => productItem.id.toString() === id)
+  const {addItem} = useCart()
   // console.log(product)
   if(!product) {
     return <Text>Product not found</Text>
   }
 
   const addToCart = () => {
-    console.log('adding to cart...')
+    if(!product) {
+      return
+    }
+    addItem(product, selectedSize)
   }
 
   return (
