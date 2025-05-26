@@ -1,6 +1,7 @@
 import Colors from '@/constants/Colors'
 import { Product } from '@/types/types'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { Link } from 'expo-router'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 type ProductListItemProps = {
   product: Product
@@ -10,18 +11,20 @@ const defaultPizza = `https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/d
 
 export default function ProductListItem({product}: ProductListItemProps) {
   return (
-    <View style={styles.container}>
-      <Image 
-        source={{uri: product.image || defaultPizza}} 
-        style={styles.image}
-        resizeMode='contain'
-      />
+    <Link href={`/${product.id}`} asChild>
+      <TouchableOpacity style={styles.container}>
+        <Image 
+          source={{uri: product.image || defaultPizza}} 
+          style={styles.image}
+          resizeMode='contain'
+        />
 
-      <View style={styles.infoContainer}>
-        <Text style={styles.name}>{product.name}</Text>
-        <Text style={styles.price}>RM {product.price}</Text>
-      </View>
-    </View>
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>{product.name}</Text>
+          <Text style={styles.price}>RM {product.price}</Text>
+        </View>
+      </TouchableOpacity>
+    </Link>
   )
 }
 
