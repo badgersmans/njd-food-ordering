@@ -10,8 +10,7 @@ const CartProvider = ({children}) => {
   )
 }
 
-export const useCartProvider = () => {
-  return useContext(CartContext)
-}
+export const useCart = () => useContext(CartContext)
+
 
 export default CartProvider;
