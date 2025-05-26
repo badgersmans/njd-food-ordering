@@ -2,8 +2,8 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { Stack, useLocalSearchParams } from 'expo-router'
 import products from '@assets/data/products'
 import { defaultPizza } from '@/components/ProductListItem'
-import Colors from '@/constants/Colors'
 import { useState } from 'react'
+import Button from '@/components/Button'
 
 const sizes = ['S', 'M', 'L', 'XL']
 
@@ -14,6 +14,10 @@ export default function ProductDetails() {
   // console.log(product)
   if(!product) {
     return <Text>Product not found</Text>
+  }
+
+  const addToCart = () => {
+    console.log('adding to cart...')
   }
 
   return (
@@ -29,12 +33,13 @@ export default function ProductDetails() {
             style={[styles.sizeTextContainer, { backgroundColor: selectedSize === size ? 'gainsboro' : 'white' }]}
             onPress={() => setSelectedSize(size)}
           >
-            <Text style={styles.sizeText}>{size}</Text>
+            <Text style={[styles.sizeText, { color: selectedSize === size ? 'black' : 'grey' }]}>{size}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
       <Text style={styles.price}>RM {product.price}</Text>
+      <Button text='Add to Cart' onPress={() => addToCart()}/>
     </View>
   )
 }
@@ -66,11 +71,11 @@ const styles = StyleSheet.create({
   },
   sizeText: {
     fontSize: 20
-    
   },
   price: {
-    // color: Colors.light.tint,
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    // backgroundColor: 'red',
+    marginTop: 'auto'
   }
 })
