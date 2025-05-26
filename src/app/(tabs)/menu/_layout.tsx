@@ -4,18 +4,21 @@ import { TouchableOpacity } from 'react-native';
 
 export default function MenuLayout() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerRight: () => (
+          <Link href={'/cart'} asChild>
+            <TouchableOpacity>
+              <Ionicons name="cart-outline" size={20} color={'black'} />
+            </TouchableOpacity>
+          </Link>
+        )
+      }}
+    >
       <Stack.Screen
         name='index'
         options={{
           title: 'Menu',
-          headerRight: () => (
-            <Link href={'/cart'} asChild>
-              <TouchableOpacity>
-                <Ionicons name="cart-outline" size={20} color={'black'} />
-              </TouchableOpacity>
-            </Link>
-          )
         }}
       />
     </Stack>
