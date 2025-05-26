@@ -26,10 +26,7 @@ export default function ProductDetails() {
         {sizes.map(size => (
           <TouchableOpacity 
             key={size} 
-            style={
-              selectedSize === size 
-              ? styles.sizeTextContainer 
-              : [styles.sizeTextContainer, { backgroundColor: null }]}
+            style={[styles.sizeTextContainer, { backgroundColor: selectedSize === size ? 'gainsboro' : 'white' }]}
             onPress={() => setSelectedSize(size)}
           >
             <Text style={styles.sizeText}>{size}</Text>
