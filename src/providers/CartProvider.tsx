@@ -19,6 +19,15 @@ const CartProvider = ({children}: PropsWithChildren) => {
 
   const addItem = (product: Product, size: CartItem['size']) => {
     // if already in cart, increment quantity
+    const existingItem = items.find(
+      (item) => item.product === product && item.size === size
+    )
+
+    if(existingItem) {
+      updateQuantity(existingItem.id, 1)
+      return
+    }
+
     const newCartItem: CartItem = {
       id: randomUUID(),
       product,
@@ -41,7 +50,7 @@ const CartProvider = ({children}: PropsWithChildren) => {
     .filter((item) => item.quantity > 0)
     // console.log(itemId, amount)
     setItems(updatedItems)
-    console.log(updatedItems)
+    // console.log(updatedItems)
   }
 
   return (
