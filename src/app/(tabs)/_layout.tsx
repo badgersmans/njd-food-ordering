@@ -22,7 +22,7 @@ export default function TabsLayout() {
           title: 'Orders',
           headerShown: true,
           tabBarIcon: ({color}) => (
-            <Ionicons name="cart-outline" size={20} color={color} />          
+            <Ionicons name="cart-outline" size={20} color={color} />
           )
         }} 
       />
