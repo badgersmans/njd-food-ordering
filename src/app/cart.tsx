@@ -1,6 +1,7 @@
+import CartListItem from '@/components/CartListItem'
 import { useCart } from '@/providers/CartProvider'
 import { StatusBar } from 'expo-status-bar'
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Platform, FlatList } from 'react-native'
 
 export default function CartScreen() {
   const {items} = useCart()
@@ -8,7 +9,14 @@ export default function CartScreen() {
     <View>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
 
-      <Text>cart items length? {items.length}</Text>
+      <FlatList 
+        data={items}
+        renderItem={({item}) => (
+          <CartListItem cartItem={item}/>
+        )}
+        contentContainerStyle={{ padding: 8, gap: 10}}
+      
+      />
     </View>
   )
 }
