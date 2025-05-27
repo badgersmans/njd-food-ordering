@@ -1,6 +1,6 @@
 import Colors from '@/constants/Colors'
 import { Product } from '@/types/types'
-import { Link } from 'expo-router'
+import { Link, useSegments } from 'expo-router'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 type ProductListItemProps = {
@@ -10,8 +10,10 @@ type ProductListItemProps = {
 export const defaultPizza = `https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/default.png`
 
 export default function ProductListItem({product}: ProductListItemProps) {
+  const segments = useSegments()
+  // console.log(segments)
   return (
-    <Link href={`/menu/${product.id}`} asChild>
+    <Link href={`/${segments[0]}/menu/${product.id}`} asChild>
       <TouchableOpacity style={styles.container}>
         <Image 
           source={{uri: product.image || defaultPizza}} 

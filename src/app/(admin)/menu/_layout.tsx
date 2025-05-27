@@ -1,5 +1,5 @@
 import { Link, Stack } from 'expo-router'
-import {Ionicons} from '@expo/vector-icons';
+import {Feather, AntDesign} from '@expo/vector-icons';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { useCart } from '@/providers/CartProvider';
 import Colors from '@/constants/Colors';
@@ -8,27 +8,42 @@ export default function MenuLayout() {
   const {items} = useCart()
 
   return (
-    <Stack
-      screenOptions={{
-        headerRight: () => (
-          <Link href={'/cart'} asChild>
+    <Stack>
+      <Stack.Screen
+        name='index'
+        options={{
+          title: 'Menu',
+          headerRight: () => (
+          <Link href={'/'} asChild>
             <TouchableOpacity style={styles.cartContainer}>
-              <Ionicons name="cart-outline" size={24} color={'black'} />
+              <AntDesign name="plussquareo" size={24} color={Colors.light.tint} />
               {items.length > 0 && (
                 <View style={styles.cartCounter}>
                   <Text style={styles.countText}>{items.length}</Text>
                 </View>
               )}
-              
             </TouchableOpacity>
           </Link>
         )
-      }}
-    >
+        }}
+      />
+
       <Stack.Screen
-        name='index'
+        name='[id]'
         options={{
           title: 'Menu',
+          headerRight: () => (
+          <Link href={'/'} asChild>
+            <TouchableOpacity style={styles.cartContainer}>
+              <Feather name="edit" size={24} color={Colors.light.tint} />
+              {items.length > 0 && (
+                <View style={styles.cartCounter}>
+                  <Text style={styles.countText}>{items.length}</Text>
+                </View>
+              )}
+            </TouchableOpacity>
+          </Link>
+        )
         }}
       />
     </Stack>
