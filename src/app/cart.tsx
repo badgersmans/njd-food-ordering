@@ -1,12 +1,13 @@
+import Button from '@/components/Button'
 import CartListItem from '@/components/CartListItem'
 import { useCart } from '@/providers/CartProvider'
 import { StatusBar } from 'expo-status-bar'
-import { View, Text, Platform, FlatList } from 'react-native'
+import { View, Text, Platform, FlatList, StyleSheet } from 'react-native'
 
 export default function CartScreen() {
-  const {items} = useCart()
+  const {items, total} = useCart()
   return (
-    <View>
+    <View style={{padding: 10}}>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
 
       <FlatList 
@@ -14,9 +15,18 @@ export default function CartScreen() {
         renderItem={({item}) => (
           <CartListItem cartItem={item}/>
         )}
-        contentContainerStyle={{ padding: 8, gap: 10}}
-      
+        contentContainerStyle={{ gap: 10}}
       />
+      <Text style={styles.priceText}>Total: RM {total}</Text>
+      <Button text='Checkout'/>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  priceText: {
+    marginTop: 15,
+    fontSize: 19,
+    fontWeight: '500'
+  }
+})

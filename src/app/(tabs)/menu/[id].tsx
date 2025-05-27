@@ -24,6 +24,7 @@ export default function ProductDetails() {
     if(!product) {
       return
     }
+  
     addItem(product, selectedSize)
     router.push('/cart');
   }
