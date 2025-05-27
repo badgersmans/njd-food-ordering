@@ -1,11 +1,42 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@/components/Button'
 
 export default function CreateScreen() {
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [errors, setErrors] = useState('')
 
   const onCreate = () => {
-    console.log('created...')
+    if(!validateInput()) {
+      return
+    }
+
+    // save in supabase
+
+    resetFields()
+  }
+
+  const resetFields = () => {
+    setName('')
+    setPrice('')
+  }
+
+  const validateInput = () => {
+    setErrors('')
+    if(!name) {
+      setErrors('Name is required')
+      return false;
+    }
+    if(!price) {
+      setErrors('Price is required')
+      return false;
+    }
+    if(isNaN(parseFloat(price))) {
+      setErrors('Price is not a number')
+      return false;
+    }
+    return true
   }
 
   return (
@@ -14,6 +45,8 @@ export default function CreateScreen() {
       <TextInput
         placeholder='Name'
         style={styles.input}
+        value={name}
+        onChangeText={setName}
       />
 
       <Text style={styles.label}>Price</Text>
@@ -21,8 +54,10 @@ export default function CreateScreen() {
         placeholder='9.99'
         style={styles.input}
         keyboardType='numeric'
+        value={price}
+        onChangeText={setPrice}
       />
-
+      <Text>{errors}</Text>
       <Button text='Create' onPress={onCreate}/>
     </View>
   )
