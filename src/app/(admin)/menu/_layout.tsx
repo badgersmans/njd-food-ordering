@@ -14,7 +14,7 @@ export default function MenuLayout() {
         options={{
           title: 'Menu',
           headerRight: () => (
-          <Link href={'/'} asChild>
+          <Link href={'/(admin)/menu/create'} asChild>
             <TouchableOpacity style={styles.cartContainer}>
               <AntDesign name="plussquareo" size={24} color={Colors.light.tint} />
               {items.length > 0 && (
